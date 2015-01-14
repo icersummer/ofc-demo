@@ -4,9 +4,11 @@ import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 
-
+/**
+ * This class manages all functions of the open flash chart api.
+ */
 public class Graph {
-	List<data_set> data_sets = new ArrayList<data_set>();
+	public List<data_set> data_sets = new ArrayList<data_set>();
 	
 	List<String> data = new ArrayList<String>();
 	List<String> links = new ArrayList<String>();
@@ -372,6 +374,7 @@ public class Graph {
 	{
 		set_x_label_style( size, "", 0, -1, "" );
 	}
+	//TODO the parameter size should be an integer
 	public void set_x_label_style( String size, String colour, int orientation, int step, String grid_colour )
 	{
 		this.x_label_style = size;
@@ -1357,138 +1360,11 @@ public class Graph {
 		}
 		return sb.toString();
 	}
-
-	abstract class data_set {
-		abstract String toString(String outputType, String number);
-	}
-	class bar extends data_set
-	{
-		String colour;
-		String alpha;
-		List<String> data;
-		List<String> links;
-		boolean _key;
-		String key;
-		int key_size;
-		String var;
-		
-		public bar( String alpha, String colour )
-		{
-			this.var = "bar";
-			
-			this.alpha = alpha;
-			this.colour = colour;
-			this.data = new ArrayList<String>();
-			this.links = new ArrayList<String>();
-			this._key = false;
-		}
-	
-		public void key( String key, int size )
-		{
-			this._key = true;
-			this.key = key;
-			this.key_size = size;
-		}
-		
-		public void add( String data, String link )
-		{
-			this.data.add(data);
-			this.links.add(link);
-		}
-		
-		public String toString( String output_type, String set_num )
-		{
-			String values = this.alpha +","+ this.colour;
-			
-			if( this._key )
-			{
-				values += ","+this.key +","+ this.key_size;
-			}
-			String tmp = null;
-			if( output_type.equals("js") )
-			{
-				tmp = "so.addVariable(\""+this.var+"\",\""+values+"\");";
-			}
-			else
-			{
-				tmp  = "&"+this.var+set_num+"="+values+"&";
-				tmp += "\r\n";
-				tmp += "&values"+set_num+"="+implode( ",", this.data )+"&";
-				if( this.links.size() > 0 )
-				{
-					tmp += "\r\n";
-					tmp += "&links"+set_num+"="+implode( ",", this.links )+"&";	
-				}
-			}
-	
-			return tmp;
-		}
-		
-	}
-	
-	class candle extends data_set
-	{
-		final int high;
-		final int low; 
-		final int close;
-		final int open;
-		
-		public candle( int high, int open, int close, int low )
-		{
-			this.high = high;
-			this.low = low;
-			this.close = close;
-			this.open = open;
-		}
-		
-		public String toString(String arg0, String arg1)
-		{
-			return "["+high+","+open+","+low+","+close+"]";
-		}
-	}
-	
-	class hlc extends data_set
-	{
-		final int high;
-		final int low; 
-		final int close;	
-		public hlc( int high, int low, int close )
-		{
-			this.high = high;
-			this.low = low;
-			this.close = close;
-		}
-		
-		public String toString(String arg0, String arg1)
-		{
-			return "["+high+","+low+","+close+"]";
-		}
-	}
-	
-	class point extends data_set
-	{
-		final int x;
-		final int y; 
-		final int size_px;
-		
-		public point( int x, int y, int size_px )
-		{
-			this.x = x;
-			this.y = y;
-			this.size_px = size_px;
-		}
-		
-		public String toString(String arg0, String arg1)
-		{
-			return "["+x+","+y+","+size_px+"]";
-		}
-	}
-	class Line {
-		String type;
-		String description;
-		public Line(String t, String d) {
-			type = t;
-			description = d;
-		}
-	}
 }
+
+	
+
+	
+	//TODO have many other type Chart , refer to open-flash-chart.php
+	// ...
+	
