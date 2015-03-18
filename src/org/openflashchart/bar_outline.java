@@ -38,4 +38,33 @@ public class bar_outline extends bar
 		
 		return values;
 	}
+	
+
+/*	public String toString( String output_type, String set_num )
+	{
+		String values = this.alpha +","+ this.colour;
+		
+		if( this._key )
+		{
+			values += ","+this.key +","+ this.key_size;
+		}
+		String tmp = null;
+		if( output_type.equals("js") )
+		{
+			tmp = "so.addVariable(\""+this.var+"\",\""+values+"\");";
+		}
+		else
+		{
+			tmp  = "&"+this.var+set_num+"="+values+"&";
+			tmp += "\r\n";
+			tmp += "&values"+set_num+"="+implode( ",", this.data )+"&";
+			if( this.links.size() > 0 )
+			{
+				tmp += "\r\n";
+				tmp += "&links"+set_num+"="+implode( ",", this.links )+"&";	
+			}
+		}
+
+		return tmp;
+	}*/
 }

@@ -17,6 +17,8 @@ refer http://teethgrinder.co.uk/open-flash-chart/gallery-bar.php
 <%
 org.openflashchart.bar_outline aBar = new org.openflashchart.bar_outline("50", "#9933CC", "#8010A0");
 aBar.key("Page Views", 10);
+System.out.println("aBar.tostring="+(aBar.toString()));
+System.out.println("aBar.tostring="+(aBar.toString("","")));
 java.util.Random random = new java.util.Random();
 for(int i=0;i<9;i++){
 	int x = random.nextInt(10);
